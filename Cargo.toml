@@ -1,0 +1,6 @@
+[package]
+name = "freeze-flash"
+version = "0.1.0"
+authors = ["David McGillicuddy <david.mcgillicuddy@moneyfarm.com>"]
+
+[dependencies]
