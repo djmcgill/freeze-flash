@@ -44,20 +44,9 @@ impl App {
     }
 
     fn update(&mut self, args: &UpdateArgs) {
-        {
-            let &mut App { ref mut player, ref player_update_command, .. } = self;
-            player.update(args, player_update_command);
-        }
-
-        let p_to_m = self.current_mouse_pos - self.player.position;
-        let angle_from_vert = if p_to_m.x != 0.0 {
-            Rad::atan(p_to_m.y/p_to_m.x)
-        } else {
-            Rad(0.0)
-        };
-
-        self.player.rotation = angle_from_vert;
-
+        let &mut App { ref mut player, ref player_update_command, ref current_mouse_pos, .. } = self;
+        player.update(args, player_update_command);
+        player.point_to(args, current_mouse_pos);
     }
 }
 
@@ -87,6 +76,7 @@ fn main() {
         player: Player {
             rotation: Rad(0.0),
             position: center,
+            velocity: Vector2::new(0.0, 0.0),
         },
     };
 
